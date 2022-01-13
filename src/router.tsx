@@ -27,7 +27,9 @@ const Messenger = Loader(lazy(() => import('src/content/applications/Messenger')
 const Transactions = Loader(lazy(() => import('src/content/applications/Transactions')));
 const UserProfile = Loader(lazy(() => import('src/content/applications/Users/profile')));
 const UserSettings = Loader(lazy(() => import('src/content/applications/Users/settings')));
-
+const IdNumberSearch = Loader(lazy(() => import('src/content/applications/Searches/IdNumberSearch')));
+const NameDateBirthSearch = Loader(lazy(() => import('src/content/applications/Searches/NameDateBirthSearch')));
+const NameSearch = Loader(lazy(() => import('src/content/applications/Searches/NameSearch')));
 // Components
 
 const Buttons = Loader(lazy(() => import('src/content/pages/Components/Buttons')));
@@ -51,11 +53,11 @@ const StatusMaintenance = Loader(lazy(() => import('src/content/pages/Status/Mai
 const routes: PartialRouteObject[] = [
   {
     path: '*',
-    element: <BaseLayout />,
+    element: <SidebarLayout />,
     children: [
       {
         path: '/',
-        element: <Overview />
+        element: <IdNumberSearch />
       },
       {
         path: 'overview',
@@ -165,6 +167,34 @@ const routes: PartialRouteObject[] = [
           {
             path: 'settings',
             element: <UserSettings />
+          },
+        ]
+      },
+
+      {
+        path: 'searches',
+        children: [
+          {
+            path: '/',
+            element: (
+              <Navigate
+                to="number_search"
+                replace
+              />
+            )
+          },
+          {
+            path: 'number_search',
+            element: <IdNumberSearch />
+          },
+
+          {
+            path: 'name_date_birth_search',
+            element: <NameDateBirthSearch />
+          },
+          {
+            path: 'name_search',
+            element: <NameSearch />
           },
         ]
       }
